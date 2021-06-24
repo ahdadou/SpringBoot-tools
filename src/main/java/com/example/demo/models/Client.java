@@ -31,7 +31,7 @@ public class Client {
 	
 	private String lastname;
 	
-//	@Indexed(unique = true)
+	@Indexed(unique = true)
 	private String Email;
 
 	private Gender gender;

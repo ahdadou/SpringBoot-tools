@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.ClientRepository;
 import com.example.demo.dto.ClientDto;
+import com.example.demo.exceptions.NotFoundException;
 import com.example.demo.models.Client;
 
 
@@ -35,7 +36,7 @@ public class ClientService {
 	}
 
 	public Client getById(Long id) {
-		return clientRepository.findById(id).get();
+		return clientRepository.findById(id).orElseThrow(()->new NotFoundException("User Not Found"));
 	}
 	
 	public Client getByEmail(String email) {
@@ -47,10 +48,10 @@ public class ClientService {
 	}
 	
 	
-	public void saveDto(ClientDto client) {
+	public Client saveDto(ClientDto client) {
 		// TODO Auto-generated method stub
 		Client cli = modelMapper.map(client,Client.class);
-		clientRepository.save(cli);
+		return clientRepository.save(cli);
 	}
 	
 	
