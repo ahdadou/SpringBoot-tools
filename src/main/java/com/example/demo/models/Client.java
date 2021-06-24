@@ -1,51 +1,50 @@
 package com.example.demo.models;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
+
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Document(collection = "client")
 public class Client {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(length = 20)
 	private String firstname;
 	
-	@Column(length = 20)
 	private String lastname;
+	
+//	@Indexed(unique = true)
+	private String Email;
 
-	@Column(length = 20, unique = true)
-	private String username;
+	private Gender gender;
 	
-	@Column(length = 20, unique = true)
-	private String email;
+	private Address address;
 	
+	private List<String> favoritesSubjects;
 	
-	private String password;
+	private BigDecimal totalMoney;
 	
-	@ManyToMany(mappedBy = "clients",cascade = CascadeType.ALL)
-	private List<Product> products = new ArrayList<Product>() ;
+	private LocalDateTime createdDate;
+	
+
+	
 	
 }

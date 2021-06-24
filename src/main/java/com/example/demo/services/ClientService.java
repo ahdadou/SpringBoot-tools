@@ -3,7 +3,7 @@ package com.example.demo.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.transaction.Transactional;
+//import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import com.example.demo.models.Client;
 
 
 @Service
-@Transactional
+//@Transactional
 public class ClientService {
 	
 	private ClientRepository clientRepository;
@@ -35,30 +35,43 @@ public class ClientService {
 	}
 
 	public Client getById(Long id) {
-		// TODO Auto-generated method stub
 		return clientRepository.findById(id).get();
+	}
+	
+	public Client getByEmail(String email) {
+		return clientRepository.findClientByEmail(email).get();
 	}
 
 	public List<Client> getAll() {
-		// TODO Auto-generated method stub
 		return clientRepository.findAll();
 	}
 	
-	public List<ClientDto> getAllDto() {
+	
+	public void saveDto(ClientDto client) {
 		// TODO Auto-generated method stub
-		return clientRepository.getAll();
+		Client cli = modelMapper.map(client,Client.class);
+		clientRepository.save(cli);
 	}
 	
 	
+	
+	// Method 1 Covert Objet To DTO
 	public List<ClientDto> getAllDto2() {
-		// TODO Auto-generated method stub	
 		return convertToDto(clientRepository.findAll());
 			
 	}
 	
+	private List<ClientDto> convertToDto(List<Client> client) {
+		   
+		List<ClientDto> c= client.stream()
+				.map(x -> modelMapper.map(x,ClientDto.class)).collect(Collectors.toList());
+		return c;
+		
+	}
 	
+	
+	// Method 2 Covert Objet To DTO
 	public List<ClientDto> getAllDto3() {
-		// TODO Auto-generated method stub	
 		return clientRepository.findAll()
 				.stream()
 				.map(x -> convertToDto(x))
@@ -67,17 +80,13 @@ public class ClientService {
 	}
 	
 	
+	
 	private ClientDto convertToDto(Client client) {	
 		return modelMapper.map(client,ClientDto.class);
 	}
 	
-	private List<ClientDto> convertToDto(List<Client> client) {
-	   
-		List<ClientDto> c= client.stream()
-				.map(x -> modelMapper.map(x,ClientDto.class)).collect(Collectors.toList());
-		return c;
-		
-	}
+	
+
 	
 	
 

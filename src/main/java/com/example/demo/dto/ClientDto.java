@@ -1,7 +1,8 @@
 package com.example.demo.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+
+
+import com.example.demo.models.Gender;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +19,7 @@ public class ClientDto {
 
 	private String firstname;	
 	private String lastname;
-	private String username;
 	private String email;
+	private Gender gender;
 	
 }

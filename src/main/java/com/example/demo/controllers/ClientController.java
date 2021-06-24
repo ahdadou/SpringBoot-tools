@@ -37,19 +37,25 @@ public class ClientController {
 		clientService.save(client);
 	}
 	
+	@PostMapping("/dto")
+	public void saveDto(@RequestBody ClientDto client){
+		
+		clientService.saveDto(client);
+	}
+	
 	@GetMapping("/{id}")
 	public Client getById(@PathVariable("id") Long id) {
 		return clientService.getById(id);
 	}
 	
 	@GetMapping
-	public List<Client> getAll() {
+	public List<Client> getAllClient() {
 		return clientService.getAll();
 	}
 	
 	
 	@GetMapping("/dto")
-	public List<ClientDto> getAllDto() {
+	public List<ClientDto> getAllClienDTO() {
 		return clientService.getAllDto3();
 	}
 	
