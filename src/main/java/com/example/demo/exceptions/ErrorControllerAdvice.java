@@ -22,7 +22,7 @@ public class ErrorControllerAdvice {
 
 	
 //	@ExceptionHandler(NoSuchElementException.class)
-	@ExceptionHandler(NotFoundException.class)
+	@ExceptionHandler(NotFoundException.class) // Error Name You Can Get It From POSTMAN
 	@ResponseStatus(code = HttpStatus.NOT_FOUND)
 	public HandleException handleNotFoundException(NotFoundException exception,HttpServletRequest request) {		
 		HandleException error = new HandleException(404,exception.getMessage(),LocalDateTime.now(),request.getServletPath());

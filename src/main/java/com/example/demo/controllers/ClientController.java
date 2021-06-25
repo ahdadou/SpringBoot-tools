@@ -26,8 +26,14 @@ import com.example.demo.exceptions.NotFoundException;
 import com.example.demo.models.Client;
 import com.example.demo.services.ClientService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping("client")
+@Api(value = "ClientController Rest EndPoint",description = "show client API'S")
 public class ClientController {
 	
 	
@@ -38,7 +44,7 @@ public class ClientController {
 		this.clientService = clientService;
 	}
 	
-	
+	@ApiOperation(value = "POST CLIENT USE CLIENT")
 	@PostMapping
 	public ResponseEntity<?> save(@RequestBody Client client){		
 		try {
@@ -48,13 +54,20 @@ public class ClientController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new HandleException(402,"Cant Add this Client",LocalDateTime.now(),"/client"));
 		}
 	}
-	
+	@ApiOperation(value = "POST CLIENT USE DTOCLIENT")
 	@PostMapping("/dto")
 	public Client saveDto(@RequestBody ClientDto client){	
 		System.out.println("*****************************");
 		return clientService.saveDto(client);
 	}
 	
+	@ApiOperation(value = "Return Client By Id")
+	@ApiResponses(
+			value= {
+					@ApiResponse(code = 100,message = "100 is the message"),
+					@ApiResponse(code = 200,message = "200 is the message"),
+					}
+			)
 	@GetMapping("/{id}")
 	public Client getById(@PathVariable("id") Long id) {
 		return clientService.getById(id);
