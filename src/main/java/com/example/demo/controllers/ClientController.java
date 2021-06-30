@@ -36,16 +36,15 @@ import io.swagger.annotations.ApiResponses;
 @Api(value = "ClientController Rest EndPoint",description = "show client API'S")
 public class ClientController {
 	
-	@Autowired
 	private ClientService clientService;
 	
 
 
 	
-//	@Autowired
-//	public ClientController(ClientService clientService) {
-//		this.clientService = clientService;
-//	}
+	@Autowired
+	public ClientController(ClientService clientService) {
+		this.clientService = clientService;
+	}
 	
 	@ApiOperation(value = "POST CLIENT USE CLIENT")
 	@PostMapping
