@@ -13,6 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.mongodb.annotations.NotThreadSafe;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,7 +28,7 @@ import lombok.NoArgsConstructor;
 public class Client {
 	
 	@Id
-	
+    @ApiModelProperty(value = "this is id of Client") // for Swagger
 	private Long id;
 	
 	private String firstname;
