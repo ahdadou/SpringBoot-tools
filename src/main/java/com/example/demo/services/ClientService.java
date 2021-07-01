@@ -36,6 +36,10 @@ public class ClientService {
 	public void save(Client client) {
 		clientRepository.save(client);
 	}
+	
+	public Client save2(Client client) {
+		return clientRepository.save(client);
+	}
 
 	public Client getById(Long id) {
 		return clientRepository.findById(id).orElseThrow(()->new NotFoundException("User Not Found"));
@@ -86,6 +90,16 @@ public class ClientService {
 	
 	private ClientDto convertToDto(Client client) {	
 		return modelMapper.map(client,ClientDto.class);
+	}
+
+	public void deleteById(Long clientId) {
+		// TODO Auto-generated method stub
+		clientRepository.deleteById(clientId);
+	}
+
+	public Client updateClient(Client mockclient) {
+		// TODO Auto-generated method stub
+		return clientRepository.save(mockclient);
 	}
 	
 	
